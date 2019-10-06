@@ -2,10 +2,11 @@ const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
 const clientPath = path.resolve(__dirname, "src");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const devMode = process.env.NODE_ENV !== "production";
 module.exports = {
   entry: {
     main: path.resolve(clientPath, "index.tsx")
-    // login: path.resolve(clientPath, "src/pages/login/index.js")
   },
   output: {
     publicPath: "/",
@@ -42,6 +43,25 @@ module.exports = {
       },
       {
         test: /\.(css|less|scss)$/,
+        exclude: /node_modules/,
+        use: [
+          devMode ? "style-loader" : MiniCssExtractPlugin.loader,
+          {
+            loader: "typings-for-css-modules-loader",
+            options: {
+              modules: true,
+              namedExport: true,
+              camelCase: true,
+              minimize: true,
+              localIdentName: "[local]_[hash:base64:5]",
+              sass: true
+            }
+          },
+          "sass-loader"
+        ]
+      },
+      {
+        test: /\.css$/,
         use: ["style-loader", "css-loader", "sass-loader"]
       }
     ]
@@ -63,7 +83,7 @@ module.exports = {
     port: 7000,
     hot: true,
     inline: true, //实时刷新
-    hot: true, //Enable webpack's Hot Module Replacement feature
+    // hot: true, //Enable webpack's Hot Module Replacement feature
     compress: true, //Enable gzip compression for everything served
     overlay: true, //Shows a full-screen overlay in the browser
     stats: "errors-only", //To show only errors in your bundle
@@ -78,10 +98,15 @@ module.exports = {
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: path.resolve(process.cwd(), "src/index.html"),
+      template: path.resolve(process.cwd(), "public/index.html"),
       filename: "index.html"
       // favicon: path.resolve(process.cwd(), "assets/image/favicon.ico")
     }),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.WatchIgnorePlugin([/css\.d\.ts$/]),
+    new MiniCssExtractPlugin({
+      filename: devMode ? "[name].css" : "[name].[hash].css",
+      chunkFilename: devMode ? "[id].css" : "[id].[hash].css"
+    })
   ]
 };
