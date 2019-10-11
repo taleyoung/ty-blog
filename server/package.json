@@ -23,7 +23,10 @@
   },
   "dependencies": {
     "egg": "^2.6.1",
-    "egg-scripts": "^2.6.0"
+    "egg-mysql": "^3.0.0",
+    "egg-scripts": "^2.6.0",
+    "egg-sequelize": "^5.2.0",
+    "mysql2": "^1.7.0"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.40",
@@ -31,9 +34,10 @@
     "@types/supertest": "^2.0.0",
     "autod": "^3.0.1",
     "autod-egg": "^1.1.0",
-    "egg-ci": "^1.8.0",
     "egg-bin": "^4.11.0",
+    "egg-ci": "^1.8.0",
     "egg-mock": "^3.16.0",
+    "sequelize-cli": "^5.5.1",
     "tslib": "^1.9.0",
     "tslint": "^5.0.0",
     "tslint-config-egg": "^1.0.0",
