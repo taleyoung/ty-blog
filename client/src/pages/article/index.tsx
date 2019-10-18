@@ -4,10 +4,12 @@ import style from "./style.less";
 
 const Article: SFC = () => {
   return (
-    <div className={style.container}>
-      <ArticleCard></ArticleCard>
-      <ArticleCard></ArticleCard>
-      <ArticleCard></ArticleCard>
+    <div>
+      <div className={style.container}>
+        <ArticleCard></ArticleCard>
+        <ArticleCard></ArticleCard>
+        <ArticleCard></ArticleCard>
+      </div>
     </div>
   );
 };

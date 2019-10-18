@@ -1,7 +1,11 @@
-import { Application } from 'egg';
+import { Application } from "egg";
 
 export default (app: Application) => {
   const { controller, router } = app;
+  console.log("controller", controller.users);
 
-  router.get('/', controller.home.index);
+  //用户
+  router.get("/users", controller.users.create);
+
+  //文章
 };

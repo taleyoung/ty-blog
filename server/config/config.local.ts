@@ -31,8 +31,7 @@ export default () => {
     port: 3306,
     database: "blog",
     username: "root",
-    password: "ty836493",
-    operatorsAliases: false
+    password: "ty836493"
   };
 
   return config;
