@@ -31,12 +31,23 @@ module.exports = {
         }
       },
       {
-        test: /\.(png|jpg|gif)$/,
+        test: /\.(png|jpg|gif｜jpeg)$/,
         use: [
           {
             loader: "url-loader",
             options: {
               limit: 8192
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(png|jpg|jpeg|gif)$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              outputPath: "assets/img"
             }
           }
         ]

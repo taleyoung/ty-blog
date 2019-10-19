@@ -1,6 +1,6 @@
 import React, { SFC } from "react";
 import { Button } from "antd";
-import Header from "../components/header";
+import Header from "../layout/header";
 
 interface IProps {}
 
