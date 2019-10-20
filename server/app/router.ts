@@ -6,6 +6,6 @@ export default (app: Application) => {
 
   //用户
   router.get("/users", controller.users.create);
-
   //文章
+  router.get("/article", controller.article.index);
 };

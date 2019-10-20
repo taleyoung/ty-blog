@@ -40,7 +40,7 @@ export interface IProps {}
 
 const Header: SFC<IProps> = () => (
   <div className={style.topBar}>
-    <div className={style.logo}>Taleyoung's Blog</div>
+    <div className={style.logo}>Taleyoung的博客</div>
     <div className={style.menu}>
       <Menu theme="light" mode="horizontal" defaultSelectedKeys={["首页"]}>
         {menuList.map(menu => (
