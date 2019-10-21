@@ -14,7 +14,7 @@ export default () => {
       // 用户名
       user: "root",
       // 密码
-      password: "ty836493",
+      password: "taleyoung",
       // 数据库名
       database: "blog"
     },
@@ -31,7 +31,7 @@ export default () => {
     port: 3306,
     database: "blog",
     username: "root",
-    password: "ty836493"
+    password: "taleyoung"
   };
 
   return config;
