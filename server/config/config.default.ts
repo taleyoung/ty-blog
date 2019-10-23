@@ -15,6 +15,11 @@ export default (appInfo: EggAppInfo) => {
       enable: false
     }
   };
+  config.cors = {
+    origin: "http://127.0.0.1:7000",
+    credentials: true,
+    allowMethods: "GET,HEAD,PUT,POST,DELETE,PATCH"
+  };
 
   // add your special config in here
   const bizConfig = {

@@ -3,7 +3,7 @@ import { Service } from "egg";
 export default class ArticleService extends Service {
   public async getAllArticle() {
     let { ctx } = this;
-    return await ctx.model.Article.findAll({});
+    return await ctx.model.Article.findAll();
   }
   public async insertArticle(params) {
     const { ctx } = this;
@@ -15,9 +15,10 @@ export default class ArticleService extends Service {
   }
   public async updateArticle(params) {
     const { ctx } = this;
-    return await ctx.model.Article.update(
+    await ctx.model.Article.update(
       { title: params.title, content: params.content },
       { where: { id: params.id } }
     );
+    return this.getAllArticle();
   }
 }

@@ -9,36 +9,34 @@ export default class ArticleController extends Controller {
       content
     };
     const res = await ctx.service.article.insertArticle(params);
-    ctx.body = res;
-    ctx.status = 200;
+    ctx.returnBody(200, res);
   }
   public async showAll() {
     const { ctx } = this;
-    const res = await ctx.service.article.getAllArticle();
-    ctx.body = res;
-    ctx.status = 200;
+    try {
+      const res = await ctx.service.article.getAllArticle();
+      ctx.returnBody(200, res);
+    } catch (error) {
+      ctx.returnBody(404, {}, "查询失败");
+    }
   }
   public async delete() {
     const { ctx } = this;
-    const { id } = ctx.request.body;
-    const params = {
-      id
-    };
-    const res = await ctx.service.article.deleteArticle(params);
-    ctx.body = res;
-    ctx.status = 200;
+    const { id } = ctx.params;
+    const res = await ctx.service.article.deleteArticle({ id });
+    ctx.returnBody(200, res);
   }
 
   public async update() {
     const { ctx } = this;
-    const { id, title = "", content = "" } = ctx.request.body;
+    const { id } = ctx.params;
+    const { title = "", content = "" } = ctx.request.body;
     const params = {
       id,
       title,
       content
     };
     const res = await ctx.service.article.updateArticle(params);
-    ctx.body = res;
-    ctx.status = 200;
+    ctx.returnBody(200, res);
   }
 }

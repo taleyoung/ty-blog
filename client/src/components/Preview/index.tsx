@@ -1,10 +1,16 @@
 import React, { SFC } from "react";
-import { Icon, Tag, Divider } from "antd";
+import { Icon, Divider } from "antd";
 import ArticleInfo from "../ArticleInfo";
-import TagIcon from "../TagIcon";
 import style from "./style.less";
 
-const Preview: SFC = () => {
+interface Props {
+  title: string;
+  content: string;
+}
+
+const Preview: SFC<Props> = ({ title, content }) => {
+  const tags = ["111", "222", "333"];
+  const archives = ["aaa", "bbb", "ccc"];
   return (
     <div>
       <div className={style.container}>
@@ -13,16 +19,13 @@ const Preview: SFC = () => {
           <div>24</div>
         </div>
         <div className={style.content}>
-          <div className={style.title}>从Material Design到UI设计的思考</div>
-          <div>
-            说来惭愧，工作3年多，都没有认真的通读Material
-            Design，只人云亦云的在某些工作案例中去学习它的操作方式。
-            最近再读Material
-            Design，感叹Google设计师的伟大。说来惭愧，工作3年多，都没有认真的通读Material
-            Design，只人云亦云的在某些工作案例中去学习它的操作方式。
-            最近再读Material Design，感叹Google设计师的伟大。
-          </div>
-          <ArticleInfo></ArticleInfo>
+          <div className={style.title}>{title}</div>
+          <div>{content}</div>
+          <ArticleInfo
+            time="2019-10-01"
+            tags={tags}
+            archives={archives}
+          ></ArticleInfo>
         </div>
       </div>
       <Divider></Divider>

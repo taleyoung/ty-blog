@@ -7,7 +7,7 @@ const Article: SFC = () => {
     <div>
       <div className={style.container}>
         <div className={style.title}>从Material Design到UI设计的思考</div>
-        <ArticleInfo></ArticleInfo>
+        {/* <ArticleInfo></ArticleInfo> */}
         <div className={style.content}>
           说来惭愧，工作3年多，都没有认真的通读Material
           Design，只人云亦云的在某些工作案例中去学习它的操作方式。
