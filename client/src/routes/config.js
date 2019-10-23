@@ -1,7 +1,7 @@
-import Home from "../pages/overview";
-import Article from "../pages/article";
-import About from "../pages/about";
-import NotFound from "../pages/notFound";
+import Home from "../pages/app/overview";
+import Article from "../pages/app/article";
+import About from "../pages/app/about";
+import NotFound from "../pages/app/notFound";
 
 let routes = [
   {

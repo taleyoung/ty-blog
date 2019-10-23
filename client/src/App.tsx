@@ -6,11 +6,11 @@ import {
   Redirect
 } from "react-router-dom";
 import Routes from "./routes/index.js";
-import Overview from "./pages/overview";
-import Home from "./pages/home";
-import Article from "./pages/article";
-import TimeLine from "./pages/timeLine";
-import About from "./pages/about";
+import Overview from "./pages/app/overview";
+import Home from "./pages/app/home";
+import Article from "./pages/app/article";
+import TimeLine from "./pages/app/timeLine";
+import About from "./pages/app/about";
 import PageLayout from "./layout";
 
 const App: SFC = () => {

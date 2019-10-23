@@ -1,7 +1,7 @@
 import React, { SFC } from "react";
-import { add, subtract } from "../../redux/actions/counter";
+import { add, subtract } from "../../../redux/actions/counter";
 import { connect } from "react-redux";
-import { Store } from "../../types";
+import { Store } from "../../../types/store";
 
 const mapStateToProps = (state: Store) => ({
   number: state.counter.number

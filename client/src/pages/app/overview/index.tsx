@@ -1,11 +1,10 @@
 import React, { SFC, useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { Store } from "../../types/index";
-import Preview from "../../components/Preview";
+import { Store } from "../../../types/store";
+import Preview from "../../../components/Preview";
 import style from "./style.less";
 
-import { getAllArticle } from "../../api/article";
-import { fetchArticleList } from "../../redux/actions/article";
+import { fetchArticleList } from "../../../redux/actions/article";
 
 interface Props {
   articleList: Array<{ title: string; content: string }>;

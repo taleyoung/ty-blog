@@ -1,5 +1,5 @@
 import React, { SFC } from "react";
-import ArticleInfo from "../../components/ArticleInfo";
+import ArticleInfo from "../../../components/ArticleInfo";
 import style from "./style.less";
 
 const Article: SFC = () => {

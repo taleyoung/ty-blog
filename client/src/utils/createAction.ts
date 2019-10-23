@@ -1,6 +1,6 @@
-interface Assets {
+export interface Action {
   type: string;
-  payload: any;
+  payload?: any;
 }
 
 const actionSuccess = (type: string, payload: any) => ({
@@ -13,7 +13,7 @@ export const createActionAsync = (
   type: string,
   data: any = {},
   method: string = "get"
-) => async (dispatch: (arg: Assets) => Assets) => {
+) => async (dispatch: (arg: Action) => Action) => {
   try {
     const body = method === "get" ? null : JSON.stringify(data);
     let res = await fetch(url, {
