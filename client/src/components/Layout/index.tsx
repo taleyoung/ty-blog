@@ -14,6 +14,7 @@ const siderLayout = { xxl: 4, xl: 5, lg: 5, sm: 0, xs: 0 };
 const contentLayout = { xxl: 15, xl: 15, lg: 15, sm: 24, xs: 24 };
 
 const PageLayout: SFC<IProp> = props => {
+  console.log("props2222", props);
   return (
     <Layout className={style.container}>
       <Header></Header>

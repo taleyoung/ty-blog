@@ -1,7 +1,7 @@
 import React, { SFC } from "react";
 import { Avatar, Divider, Tag } from "antd";
 import style from "./style.less";
-import avatar1 from "../../assets/img/avatar1.jpeg";
+import avatar1 from "../../../assets/img/avatar1.jpeg";
 
 export interface IProp {}
 

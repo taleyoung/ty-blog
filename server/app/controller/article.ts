@@ -11,15 +11,28 @@ export default class ArticleController extends Controller {
     const res = await ctx.service.article.insertArticle(params);
     ctx.returnBody(200, res);
   }
+
   public async showAll() {
     const { ctx } = this;
     try {
-      const res = await ctx.service.article.getAllArticle();
+      const res = await ctx.service.article.getArticle();
       ctx.returnBody(200, res);
     } catch (error) {
       ctx.returnBody(404, {}, "查询失败");
     }
   }
+
+  public async showDetail() {
+    const { ctx } = this;
+    try {
+      const { id } = ctx.params;
+      const res = await ctx.service.article.getArticle(id);
+      ctx.returnBody(200, res);
+    } catch (error) {
+      ctx.returnBody(404, {}, "查询失败");
+    }
+  }
+
   public async delete() {
     const { ctx } = this;
     const { id } = ctx.params;

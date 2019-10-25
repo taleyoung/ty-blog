@@ -9,9 +9,11 @@ export interface Counter {
 
 export interface Article {
   articleList: Array<ArticleContent>;
+  article: ArticleContent;
 }
 
 export interface ArticleContent {
+  id: number;
   title: string;
   content: string;
 }

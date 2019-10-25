@@ -1,3 +1,5 @@
+import { Dispatch } from "redux";
+
 export interface Action {
   type: string;
   payload?: any;
@@ -13,7 +15,7 @@ export const createActionAsync = (
   type: string,
   data: any = {},
   method: string = "get"
-) => async (dispatch: (arg: Action) => Action) => {
+) => async (dispatch: Dispatch) => {
   try {
     const body = method === "get" ? null : JSON.stringify(data);
     let res = await fetch(url, {

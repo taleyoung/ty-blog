@@ -6,6 +6,7 @@ import style from "./style.less";
 interface Props {
   title: string;
   content: string;
+  // onClick: () => void;
 }
 
 const Preview: SFC<Props> = ({ title, content }) => {

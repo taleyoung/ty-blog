@@ -1,24 +1,29 @@
 import { Service } from "egg";
 
 export default class ArticleService extends Service {
-  public async getAllArticle() {
+  public async getArticle(id?: string) {
     let { ctx } = this;
-    return await ctx.model.Article.findAll();
+    const res = id
+      ? await ctx.model.Article.findOne({ where: { id } })
+      : await ctx.model.Article.findAll();
+    return res;
   }
+
   public async insertArticle(params) {
     const { ctx } = this;
     return await ctx.model.Article.create(params);
   }
+
   public async deleteArticle(params) {
     const { ctx } = this;
     return await ctx.model.Article.destroy({ where: params });
   }
+
   public async updateArticle(params) {
     const { ctx } = this;
-    await ctx.model.Article.update(
+    return await ctx.model.Article.update(
       { title: params.title, content: params.content },
       { where: { id: params.id } }
     );
-    return this.getAllArticle();
   }
 }

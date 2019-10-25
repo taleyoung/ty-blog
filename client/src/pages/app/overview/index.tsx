@@ -1,37 +1,38 @@
-import React, { SFC, useState, useEffect } from "react";
+import React, { SFC, useEffect } from "react";
 import { connect } from "react-redux";
-import { Store } from "../../../types/store";
+import { RouteComponentProps } from "react-router-dom";
+
+import { Store, ArticleContent } from "../../../types/store";
 import Preview from "../../../components/Preview";
+import { fetchArticleList, Action } from "../../../redux/actions/article";
 import style from "./style.less";
 
-import { fetchArticleList } from "../../../redux/actions/article";
-
 interface Props {
-  articleList: Array<{ title: string; content: string }>;
+  articleList: Array<ArticleContent>;
   fetchArticleList: any;
 }
 
-const Overview: SFC<Props> = props => {
-  const [articles, setArticles] = useState([]);
-
+const Overview: SFC<Props & RouteComponentProps> = props => {
   useEffect(() => {
     const getArticles = async () => {
-      // const res = await getAllArticle();
-      const res = await props.fetchArticleList();
-      console.log("resVIEW", props);
-      setArticles(res);
+      await props.fetchArticleList();
     };
     getArticles();
   }, []);
 
+  const toArticleDetail = (id: number) => {
+    props.history.push(`/app/article/${id}`);
+  };
+
   return (
     <div className={style.container}>
-      {articles.map((item, index) => (
-        <Preview
+      {props.articleList.map((item, index) => (
+        <div
           key={`${item.title}${index}`}
-          title={item.title}
-          content={item.content}
-        ></Preview>
+          onClick={() => toArticleDetail(item.id)}
+        >
+          <Preview title={item.title} content={item.content}></Preview>
+        </div>
       ))}
     </div>
   );
