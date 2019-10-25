@@ -1,20 +1,19 @@
 import React, { SFC, ReactNode } from "react";
-import Header from "./header";
-import SideBar from "./sideBar";
+import Header from "./Header";
+import SideBar from "./SideBar";
 import { Layout, Row, Col } from "antd";
 import style from "./style.less";
 
 const { Footer } = Layout;
 
-export interface IProp {
+export interface Props {
   children: ReactNode;
 }
 
 const siderLayout = { xxl: 4, xl: 5, lg: 5, sm: 0, xs: 0 };
 const contentLayout = { xxl: 15, xl: 15, lg: 15, sm: 24, xs: 24 };
 
-const PageLayout: SFC<IProp> = props => {
-  console.log("props2222", props);
+const AppLayout: SFC<Props> = props => {
   return (
     <Layout className={style.container}>
       <Header></Header>
@@ -29,4 +28,4 @@ const PageLayout: SFC<IProp> = props => {
   );
 };
 
-export default PageLayout;
+export default AppLayout;
