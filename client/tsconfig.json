@@ -9,6 +9,16 @@
     "allowJs": true,
     "checkJs": true,
     "esModuleInterop": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "baseUrl": "./",
+    //为了让vscode明白路径别名，提供代码提示
+    "paths": {
+      "@src/*": ["src/*"],
+      "@redux/*": ["src/redux/*"],
+      "@pages/*": ["src/pages/*"],
+      "@components/*": ["src/components/*"],
+      "@assets/*": ["src/assets"],
+      "@routes/*": ["src/routes"]
+    }
   }
 }

@@ -10,7 +10,7 @@
     "start": "webpack-dev-server --mode development --open"
   },
   "keywords": [
-    "instagram"
+    "blog"
   ],
   "author": "taleyoung",
   "license": "",

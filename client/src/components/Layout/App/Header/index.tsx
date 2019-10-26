@@ -57,7 +57,7 @@ const Header: SFC<Props> = props => {
             </Menu.Item>
           ))}
         </Menu>
-        <Button>Admin</Button>
+        {/* <Button>Admin</Button> */}
       </div>
     </div>
   );

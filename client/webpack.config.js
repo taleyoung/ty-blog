@@ -78,14 +78,17 @@ module.exports = {
     ]
   },
   resolve: {
+    //配置路径别名，让webpack帮我们找路径
     alias: {
-      "@": clientPath,
-      "@scss": path.resolve(clientPath, "assets/style"),
+      "@src": clientPath,
       "@assets": path.resolve(clientPath, "assets"),
-      "@components": path.resolve(clientPath, "src/components"),
-      "@common": path.resolve(clientPath, "src/common")
+      "@pages": path.resolve(clientPath, "pages"),
+      "@redux": path.resolve(clientPath, "redux"),
+      "@components": path.resolve(clientPath, "components"),
+      "@routes": path.resolve(clientPath, "routes"),
+      "@utils": path.resolve(clientPath, "utils")
     },
-    extensions: [".tsx", ".ts", ".js"]
+    extensions: [".tsx", ".ts", ".js", ".d.ts"]
   },
   devServer: {
     contentBase: path.resolve(process.cwd(), "dist"), //本地服务器所加载的页面所在的目录
