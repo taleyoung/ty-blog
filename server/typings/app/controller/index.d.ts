@@ -4,12 +4,14 @@
 import 'egg';
 import ExportArticle from '../../../app/controller/article';
 import ExportHome from '../../../app/controller/home';
+import ExportTag from '../../../app/controller/tag';
 import ExportUsers from '../../../app/controller/users';
 
 declare module 'egg' {
   interface IController {
     article: ExportArticle;
     home: ExportHome;
+    tag: ExportTag;
     users: ExportUsers;
   }
 }

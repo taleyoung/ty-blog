@@ -9,9 +9,14 @@ export default (app: Application) => {
 
   //文章
   const apiArticle = `${rootApi}/article`;
-  router.get(`${apiArticle}/`, controller.article.showAll);
-  router.get(`${apiArticle}/:id`, controller.article.showDetail);
+  router.get(`${apiArticle}/:id?`, controller.article.show);
   router.post(`${apiArticle}/`, controller.article.create);
   router.delete(`${apiArticle}/:id`, controller.article.delete);
   router.put(`${apiArticle}/:id`, controller.article.update);
+
+  //标签
+  const apiTag = `${rootApi}/tag`;
+  router.get(`${apiTag}/`, controller.tag.show);
+  router.post(`${apiTag}/`, controller.tag.create);
+  router.delete(`${apiTag}/:name`, controller.tag.delete);
 };

@@ -1,11 +1,11 @@
 module.exports = app => {
-  const { STRING, INTEGER, DATE, NOW } = app.Sequelize;
-  const ARTICLE = app.model.define(
-    "article",
+  const { INTEGER, DATE, NOW } = app.Sequelize;
+  const TagArticle = app.model.define(
+    "tag_article",
     {
       id: { type: INTEGER, primaryKey: true, autoIncrement: true },
-      title: { type: STRING(32) },
-      content: { type: STRING(255) },
+      tag_id: { type: INTEGER },
+      article_id: { type: INTEGER },
       createdAt: { type: DATE, defaultValue: NOW },
       updatedAt: { type: DATE, defaultValue: NOW }
     },
@@ -13,5 +13,5 @@ module.exports = app => {
       freezeTableName: true
     }
   );
-  return ARTICLE;
+  return TagArticle;
 };

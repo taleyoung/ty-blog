@@ -11,6 +11,7 @@ import TimeLine from "./pages/app/timeLine";
 import About from "./pages/app/about";
 
 import AdminOverview from "./pages/admin/overview";
+import AdminArticle from "./pages/admin/article";
 
 const AppRoutes = (
   <Switch>
@@ -26,6 +27,7 @@ const AppRoutes = (
 const AdminRoutes = (
   <Switch>
     <Route path="/admin/overview" component={AdminOverview}></Route>
+    <Route path="/admin/article/:id" component={AdminArticle}></Route>
   </Switch>
 );
 
