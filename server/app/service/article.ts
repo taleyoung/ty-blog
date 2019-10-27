@@ -1,4 +1,5 @@
 import { Service } from "egg";
+import * as dayjs from "dayjs";
 import { ArticleScheme } from "../../typings/app/service/article";
 export default class ArticleService extends Service {
   public async getArticleDetail(id: number) {
@@ -9,23 +10,40 @@ export default class ArticleService extends Service {
       id: info.id,
       title: info.title,
       content: info.content,
-      updatedAt: info.updatedAt,
+      updatedAt: dayjs(info.updatedAt).format("YYYY-MM-DD HH:MM"),
       tags: [...tags]
     };
     return res;
   }
 
-  public async getArticleList() {
+  public async getArticleList(
+    page: string = "1",
+    page_size: string = "10",
+    order: string = "DESC"
+  ) {
     let { ctx } = this;
-    const infoList = await ctx.model.Article.findAll();
-    let res: Array<ArticleScheme> = [];
-    await Promise.all(
-      infoList.map(async articleInfo => {
-        const item: ArticleScheme = await this.getArticleDetail(articleInfo.id);
-        res.push(item);
-      })
-    );
-    return res;
+    let pageNum = parseInt(page);
+    let limit = parseInt(page_size);
+    let offset = (pageNum - 1) * limit;
+    try {
+      const infoList = await ctx.model.Article.findAll({
+        order: [["updated_at", order]],
+        offset,
+        limit
+      });
+      let res: Array<ArticleScheme> = [];
+      await Promise.all(
+        infoList.map(async articleInfo => {
+          const item: ArticleScheme = await this.getArticleDetail(
+            articleInfo.id
+          );
+          res.push(item);
+        })
+      );
+      return res;
+    } catch (error) {
+      console.log("error", error);
+    }
   }
 
   public async getTagsByArticleId(articleId: number) {
@@ -42,7 +60,9 @@ export default class ArticleService extends Service {
         })
       );
       return tags;
-    } catch (error) {}
+    } catch (error) {
+      console.log("error", error);
+    }
   }
 
   public async getTagNameById(id: number) {

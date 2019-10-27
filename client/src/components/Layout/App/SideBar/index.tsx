@@ -1,11 +1,20 @@
-import React, { SFC } from "react";
+import React, { SFC, useState, useEffect } from "react";
 import { Avatar, Divider, Tag } from "antd";
+import myApi from "../../../../utils/myApi";
 import style from "./style.less";
 import avatar1 from "../../../../assets/img/avatar1.jpeg";
 
 export interface IProp {}
 
 const SideBar: SFC<IProp> = () => {
+  const [tags, setTags] = useState([]);
+  useEffect(() => {
+    const fetch = async () => {
+      const res = await myApi("tag");
+      setTags(res);
+    };
+    fetch();
+  }, []);
   return (
     <div className={style.container}>
       <Avatar src={avatar1} size="large" className={style.avatar}></Avatar>
@@ -20,9 +29,11 @@ const SideBar: SFC<IProp> = () => {
       </div>
       <Divider>标签</Divider>
       <div className={style.tagList}>
-        <Tag color="red">算法</Tag>
-        <Tag color="blue">frontend</Tag>
-        <Tag color="orange">计算机网络</Tag>
+        {tags.map(item => (
+          <Tag key={item.id} color="blue">
+            {item.name}
+          </Tag>
+        ))}
       </div>
     </div>
   );

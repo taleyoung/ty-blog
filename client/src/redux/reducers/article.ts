@@ -4,7 +4,7 @@ import { Action } from "../../utils/createAction";
 
 let initState: Article = {
   articleList: [],
-  article: { id: 1, title: "", content: "" }
+  article: { id: 1, title: "", content: "", tags: [], updatedAt: "" }
 };
 
 export default function article(state: Article = initState, action: Action) {

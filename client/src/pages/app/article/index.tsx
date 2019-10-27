@@ -13,7 +13,7 @@ interface Props {
 }
 
 const Article: SFC<Props & RouteComponentProps> = props => {
-  const { title, content } = props.article;
+  const { title, content, updatedAt, tags = [] } = props.article;
 
   useEffect(() => {
     const getArticle = async () => {
@@ -30,8 +30,8 @@ const Article: SFC<Props & RouteComponentProps> = props => {
       <div className={style.container}>
         <div className={style.title}>{title}</div>
         <ArticleInfo
-          time="2019-10-10"
-          tags={["11", "22"]}
+          time={updatedAt}
+          tags={tags}
           archives={["33", "44"]}
         ></ArticleInfo>
         <div className={style.content}>{content}</div>

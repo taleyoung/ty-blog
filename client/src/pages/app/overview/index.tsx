@@ -31,7 +31,12 @@ const Overview: SFC<Props & RouteComponentProps> = props => {
           key={`${item.title}${index}`}
           onClick={() => toArticleDetail(item.id)}
         >
-          <Preview title={item.title} content={item.content}></Preview>
+          <Preview
+            title={item.title}
+            content={item.content}
+            tags={item.tags}
+            time={item.updatedAt}
+          ></Preview>
         </div>
       ))}
     </div>
