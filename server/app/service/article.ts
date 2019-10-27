@@ -1,10 +1,16 @@
 import { Service } from "egg";
 import * as dayjs from "dayjs";
-import { ArticleScheme } from "../../typings/app/service/article";
+import {
+  ArticleScheme,
+  ArticlePageList
+} from "../../typings/app/service/article";
 export default class ArticleService extends Service {
   public async getArticleDetail(id: number) {
     let { ctx } = this;
-    const info = await ctx.model.Article.findOne({ where: { id } });
+    const info = await ctx.model.Article.findOne({
+      attributes: ["id", "title", "content", "updated_at"],
+      where: { id }
+    });
     const tags = await this.getTagsByArticleId(info.id);
     const res: ArticleScheme = {
       id: info.id,
@@ -26,30 +32,42 @@ export default class ArticleService extends Service {
     let limit = parseInt(page_size);
     let offset = (pageNum - 1) * limit;
     try {
-      const infoList = await ctx.model.Article.findAll({
-        order: [["updated_at", order]],
-        offset,
-        limit
-      });
-      let res: Array<ArticleScheme> = [];
+      const infoList: ArticlePageList = await ctx.model.Article.findAndCountAll(
+        {
+          attributes: ["id", "title", "content", "updated_at"],
+          order: [["updated_at", order]],
+          offset,
+          limit
+        }
+      );
+      let data: Array<ArticleScheme> = [];
       await Promise.all(
-        infoList.map(async articleInfo => {
-          const item: ArticleScheme = await this.getArticleDetail(
-            articleInfo.id
-          );
-          res.push(item);
+        infoList.rows.map(async articleInfo => {
+          const tags = await this.getTagsByArticleId(articleInfo.id);
+          data.push({
+            id: articleInfo.id,
+            title: articleInfo.title,
+            content: articleInfo.content,
+            updatedAt: dayjs(articleInfo.updatedAt).format("YYYY-MM-DD HH:MM"),
+            tags
+          });
         })
       );
-      return res;
+      return {
+        current_page: pageNum,
+        total: infoList.count,
+        data
+      };
     } catch (error) {
       console.log("error", error);
     }
   }
 
-  public async getTagsByArticleId(articleId: number) {
+  public async getTagsByArticleId(articleId: number | string) {
     let { ctx } = this;
     try {
       const tagInfoArr = await ctx.model.TagArticle.findAll({
+        attributes: ["id"],
         where: { article_id: articleId }
       });
       let tags: any = [];

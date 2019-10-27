@@ -8,8 +8,13 @@ export interface Counter {
 }
 
 export interface Article {
-  articleList: Array<ArticleContent>;
+  articleList: ArticleList;
   article: ArticleContent;
+}
+
+export interface ArticleList {
+  total: number;
+  data: Array<ArticleContent>;
 }
 
 export interface ArticleContent {
@@ -17,5 +22,5 @@ export interface ArticleContent {
   title: string;
   content: string;
   updatedAt: string;
-  tags: Array<string>;
+  tags?: Array<string>;
 }

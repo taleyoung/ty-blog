@@ -5,5 +5,9 @@ interface ArticleScheme {
   updatedAt: string;
   tags?: Array<string>;
 }
+interface ArticlePageList {
+  count: number;
+  rows: Array<ArticleScheme>;
+}
 
-export { ArticleScheme };
+export { ArticleScheme, ArticlePageList };

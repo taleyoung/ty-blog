@@ -3,7 +3,7 @@ import { Article } from "../../types/store";
 import { Action } from "../../utils/createAction";
 
 let initState: Article = {
-  articleList: [],
+  articleList: { total: 0, data: [] },
   article: { id: 1, title: "", content: "", tags: [], updatedAt: "" }
 };
 
@@ -12,7 +12,10 @@ export default function article(state: Article = initState, action: Action) {
     case actionTypes.GET_ARTICLE_LIST:
       return {
         ...state,
-        articleList: action.payload
+        articleList: {
+          total: action.payload.total,
+          data: action.payload.data
+        }
       };
     case actionTypes.GET_ARTICLE_CONTENT:
       return {

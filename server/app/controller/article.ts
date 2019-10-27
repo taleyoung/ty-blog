@@ -12,10 +12,10 @@ export default class ArticleController extends Controller {
     const { ctx } = this;
     try {
       const { id } = ctx.params;
-      const { page, page_size } = ctx.request.query;
+      const { page, page_size, order } = ctx.request.query;
       const res = id
         ? await ctx.service.article.getArticleDetail(id)
-        : await ctx.service.article.getArticleList(page, page_size);
+        : await ctx.service.article.getArticleList(page, page_size, order);
       ctx.returnBody(200, res);
     } catch (error) {
       ctx.returnBody(404, {}, "查询失败");
