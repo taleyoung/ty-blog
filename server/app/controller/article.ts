@@ -32,7 +32,9 @@ export default class ArticleController extends Controller {
   public async update() {
     const { ctx } = this;
     const { id } = ctx.params;
+    console.log("~~~~~~~ctx.request.body", ctx.request.body);
     const { title = "", content = "" } = ctx.request.body;
+    console.log("title,content", title, content);
     const res = await ctx.service.article.updateArticle(id, title, content);
     ctx.returnBody(200, res);
   }

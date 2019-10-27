@@ -1,30 +1,29 @@
 import React, { SFC, useEffect } from "react";
 import { connect } from "react-redux";
-import { fetchArticleContent, Action } from "../../../redux/actions/article";
-import { Store, ArticleContent } from "../../../types/store";
 import { RouteComponentProps } from "react-router-dom";
-import ArticleInfo from "../../../components/ArticleInfo";
+
+import { fetchArticleDetail } from "@redux/actions/article";
+import { Store, ArticleDetail } from "@src/types/store";
+import ArticleInfo from "@components/ArticleInfo";
 import style from "./style.less";
 
 interface Props {
-  article: ArticleContent;
+  article: ArticleDetail;
   match: { params: { id: string } };
-  fetchArticleContent: any;
+  fetchArticleDetail: typeof fetchArticleDetail;
 }
 
 const Article: SFC<Props & RouteComponentProps> = props => {
   const { title, content, updatedAt, tags = [] } = props.article;
+  const { params } = props.match;
 
   useEffect(() => {
     const getArticle = async () => {
-      await props.fetchArticleContent(id);
+      await props.fetchArticleDetail(parseInt(params.id));
     };
     getArticle();
   }, []);
 
-  console.log("props", props);
-  const { id } = props.match.params;
-  console.log("id", props.match.params);
   return (
     <div>
       <div className={style.container}>
@@ -42,7 +41,7 @@ const Article: SFC<Props & RouteComponentProps> = props => {
 
 export default connect(
   (state: Store) => ({
-    article: state.article.article
+    article: state.article.articleDetail
   }),
-  { fetchArticleContent }
+  { fetchArticleDetail }
 )(Article);

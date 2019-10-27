@@ -4,23 +4,29 @@ import { Action } from "../../utils/createAction";
 
 let initState: Article = {
   articleList: { total: 0, data: [] },
-  article: { id: 1, title: "", content: "", tags: [], updatedAt: "" }
+  articleDetail: { id: 1, title: "", content: "", tags: [], updatedAt: "" }
 };
 
-export default function article(state: Article = initState, action: Action) {
-  switch (action.type) {
+export default function article(state = initState, action: Action): Article {
+  const { type, payload } = action;
+  switch (type) {
     case actionTypes.GET_ARTICLE_LIST:
       return {
         ...state,
         articleList: {
-          total: action.payload.total,
-          data: action.payload.data
+          total: payload.total,
+          data: payload.data
         }
       };
-    case actionTypes.GET_ARTICLE_CONTENT:
+    case actionTypes.GET_ARTICLE_DETAIL:
       return {
         ...state,
-        article: action.payload
+        articleDetail: payload
+      };
+    case actionTypes.UPDATE_ARTICLE_DETAIL:
+      return {
+        ...state,
+        articleDetail: payload
       };
     default:
       return initState;

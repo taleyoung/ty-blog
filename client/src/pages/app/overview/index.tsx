@@ -2,15 +2,14 @@ import React, { SFC, useEffect } from "react";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
 import { Pagination } from "antd";
-
 import { Store, ArticleList } from "../../../types/store";
 import Preview from "../../../components/Preview";
-import { fetchArticleList, Action } from "../../../redux/actions/article";
+import { fetchArticleList } from "../../../redux/actions/article";
 import style from "./style.less";
 
 interface Props {
   articleList: ArticleList;
-  fetchArticleList: any;
+  fetchArticleList: typeof fetchArticleList;
 }
 
 const Overview: SFC<Props & RouteComponentProps> = props => {

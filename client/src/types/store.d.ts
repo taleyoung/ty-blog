@@ -9,15 +9,15 @@ export interface Counter {
 
 export interface Article {
   articleList: ArticleList;
-  article: ArticleContent;
+  articleDetail: ArticleDetail;
 }
 
 export interface ArticleList {
   total: number;
-  data: Array<ArticleContent>;
+  data: Array<ArticleDetail>;
 }
 
-export interface ArticleContent {
+export interface ArticleDetail {
   id: number;
   title: string;
   content: string;

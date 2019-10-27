@@ -2,15 +2,15 @@ import React, { SFC, useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
 import { Table } from "antd";
-import { fetchArticleList, Action } from "@redux/actions/article";
-import { Store, ArticleContent, ArticleList } from "@src/types/store";
+import { fetchArticleList } from "@redux/actions/article";
+import { Store, ArticleDetail, ArticleList } from "@src/types/store";
 import BreadCrumb from "@components/BreadCrumb";
 
 interface Props {
   articleList: ArticleList;
-  fetchArticleList: any;
+  fetchArticleList: typeof fetchArticleList;
 }
-interface ArticleListTable extends ArticleContent {
+interface ArticleListTable extends ArticleDetail {
   key: string;
 }
 const Overview: SFC<Props & RouteComponentProps> = props => {
@@ -60,19 +60,6 @@ const Overview: SFC<Props & RouteComponentProps> = props => {
   };
 
   useEffect(() => {
-    // const fetch = async () => {
-    //   const res = await props.fetchArticleList();
-    //   let list: Array<ArticleListTable> = [];
-    //   let total = res.total;
-    //   res.data.forEach((item: any) => {
-    //     list.push({
-    //       ...item,
-    //       key: item.id
-    //     });
-    //   });
-    //   setArticle({ total, list });
-    //   setLoading(false);
-    // };
     const getArticles = async () => {
       await props.fetchArticleList();
       setLoading(false);
@@ -81,14 +68,10 @@ const Overview: SFC<Props & RouteComponentProps> = props => {
   }, []);
 
   useEffect(() => {
-    console.log("data", data);
-    let tableData: Array<ArticleListTable> = [];
-    data.forEach(item => {
-      tableData.push({
-        ...item,
-        key: JSON.stringify(item.id)
-      });
-    });
+    let tableData: Array<ArticleListTable> = data.map(item => ({
+      ...item,
+      key: JSON.stringify(item.id)
+    }));
     setData(tableData);
   }, [data]);
 

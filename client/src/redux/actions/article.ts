@@ -1,5 +1,6 @@
 import * as actionTypes from "../action-types";
 import { createActionAsync } from "../../utils/createAction";
+import { UpdateArticleScheme } from "@src/types";
 
 const url = "http://127.0.0.1:7001/api/v1/article";
 
@@ -13,7 +14,14 @@ export const fetchArticleList = (
     actionTypes.GET_ARTICLE_LIST
   );
 
-export const fetchArticleContent = (id: string) =>
-  createActionAsync(`${url}/${id}`, actionTypes.GET_ARTICLE_CONTENT);
+export const fetchArticleDetail = (id: number) =>
+  createActionAsync(`${url}/${id}`, actionTypes.GET_ARTICLE_DETAIL);
 
-export type Action = typeof fetchArticleList;
+export const updateArticle = (id: number, data: UpdateArticleScheme) =>
+  createActionAsync(
+    `${url}/${id}`,
+    actionTypes.UPDATE_ARTICLE_DETAIL,
+    data,
+    "put",
+    "修改成功"
+  );

@@ -27,7 +27,6 @@ const Preview: SFC<Props> = ({ title, content, tags, time }) => (
         ></ArticleInfo>
       </div>
     </div>
-    <Divider></Divider>
   </div>
 );
 

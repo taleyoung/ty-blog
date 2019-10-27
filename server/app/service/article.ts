@@ -99,10 +99,12 @@ export default class ArticleService extends Service {
   }
 
   public async updateArticle(id: number, title: string, content: string) {
-    const { ctx } = this;
-    return await ctx.model.Article.update(
-      { title, content },
-      { where: { id } }
-    );
+    try {
+      const { ctx } = this;
+      await ctx.model.Article.update({ title, content }, { where: { id } });
+      return await this.getArticleDetail(id);
+    } catch (error) {
+      console.log("error", error);
+    }
   }
 }
