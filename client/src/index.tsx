@@ -9,7 +9,6 @@ import App from "./App";
 import "antd/dist/antd.css";
 
 // const history = syncHistoryWithStore(Router, store)
-
 ReactDOM.render(
   <Provider store={store}>
     <Router>

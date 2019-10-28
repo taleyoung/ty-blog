@@ -2,9 +2,9 @@ import React, { SFC, useEffect } from "react";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
 import { Pagination } from "antd";
-import { Store, ArticleList } from "../../../types/store";
-import Preview from "../../../components/Preview";
-import { fetchArticleList } from "../../../redux/actions/article";
+import { Store, ArticleList } from "@src/types/store";
+import Preview from "@components/Preview";
+import { fetchArticleList } from "@redux/actions/article";
 import style from "./style.less";
 
 interface Props {
@@ -15,7 +15,7 @@ interface Props {
 const Overview: SFC<Props & RouteComponentProps> = props => {
   const { articleList } = props;
   const { total, data } = articleList;
-  console.log("props", props);
+
   useEffect(() => {
     const getArticles = async () => {
       await props.fetchArticleList();
@@ -28,7 +28,6 @@ const Overview: SFC<Props & RouteComponentProps> = props => {
   };
 
   const pageChange = async (page: number) => {
-    console.log("page", page);
     await props.fetchArticleList(page);
   };
 
