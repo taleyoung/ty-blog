@@ -12,7 +12,6 @@ const AdminLayout: SFC<Props> = props => (
   <Layout>
     <Sider></Sider>
     <Layout>
-      {/* <Header>Header</Header> */}
       <Content className={style.content}>{props.children}</Content>
     </Layout>
   </Layout>

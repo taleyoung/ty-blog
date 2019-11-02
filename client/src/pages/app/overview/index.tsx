@@ -1,7 +1,7 @@
-import React, { SFC, useEffect } from "react";
+import React, { SFC, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
-import { Pagination } from "antd";
+import { Pagination, Spin } from "antd";
 import { Store, ArticleList } from "@src/types/store";
 import Preview from "@components/Preview";
 import { fetchArticleList } from "@redux/actions/article";
@@ -13,6 +13,7 @@ interface Props {
 }
 
 const Overview: SFC<Props & RouteComponentProps> = props => {
+  const [loading, setLoading] = useState(true);
   const { articleList } = props;
   const { total, data } = articleList;
 
@@ -21,6 +22,7 @@ const Overview: SFC<Props & RouteComponentProps> = props => {
       await props.fetchArticleList();
     };
     getArticles();
+    setLoading(false);
   }, []);
 
   const toArticleDetail = (id: number) => {
@@ -33,25 +35,27 @@ const Overview: SFC<Props & RouteComponentProps> = props => {
 
   return (
     <div className={style.container}>
-      {data.map((item, index) => (
-        <div
-          key={`${item.title}${index}`}
-          onClick={() => toArticleDetail(item.id)}
-        >
-          <Preview
-            title={item.title}
-            content={item.content}
-            tags={item.tags}
-            time={item.updatedAt}
-          ></Preview>
-        </div>
-      ))}
-      <Pagination
-        pageSize={10}
-        defaultCurrent={1}
-        total={total}
-        onChange={page => pageChange(page)}
-      />
+      <Spin spinning={loading}>
+        {data.map((item, index) => (
+          <div
+            key={`${item.title}${index}`}
+            onClick={() => toArticleDetail(item.id)}
+          >
+            <Preview
+              title={item.title}
+              content={item.content}
+              tags={item.tags}
+              time={item.updatedAt}
+            ></Preview>
+          </div>
+        ))}
+        <Pagination
+          pageSize={10}
+          defaultCurrent={1}
+          total={total}
+          onChange={page => pageChange(page)}
+        />
+      </Spin>
     </div>
   );
 };

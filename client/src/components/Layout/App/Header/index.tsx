@@ -14,7 +14,7 @@ const menuList = [
     name: "首页"
   },
   {
-    path: "/app/overview",
+    path: "/app/article",
     iconType: "icon-jilu",
     name: "文章"
   },
