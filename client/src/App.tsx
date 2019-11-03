@@ -66,7 +66,7 @@ const AppRoutes = (
 
 const AdminRoutes = (
   <Switch>
-    <Route path="/admin/article" component={AdminOverview}></Route>
+    <Route exact path="/admin/article" component={AdminOverview}></Route>
     <Route path="/admin/article/:id" component={AdminArticle}></Route>
   </Switch>
 );

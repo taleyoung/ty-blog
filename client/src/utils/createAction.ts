@@ -22,8 +22,8 @@ const actionSuccess = (type: string, payload: any) => ({
 export const createActionAsync = (
   url: string,
   type: string,
-  data: any = {},
   method: string = "get",
+  data: any = {},
   msg?: string
 ): Object => async (dispatch: Dispatch) => {
   try {

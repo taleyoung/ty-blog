@@ -1,14 +1,15 @@
 import React, { SFC, useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
-import { Table } from "antd";
-import { fetchArticleList } from "@redux/actions/article";
+import { Table, Popconfirm, Tag } from "antd";
+import { fetchArticleList, deleteArticle } from "@redux/actions/article";
 import { Store, ArticleDetail, ArticleList } from "@src/types/store";
 import BreadCrumb from "@components/BreadCrumb";
 
 interface Props {
   articleList: ArticleList;
   fetchArticleList: typeof fetchArticleList;
+  deleteArticle: typeof deleteArticle;
 }
 interface ArticleListTable extends ArticleDetail {
   key: string;
@@ -17,7 +18,7 @@ const Overview: SFC<Props & RouteComponentProps> = props => {
   const [loading, setLoading] = useState(true);
   const [tableData, setData] = useState([]);
   const { articleList } = props;
-  const { total, data } = articleList;
+  const { total, data = [] } = articleList;
 
   const columns = [
     {
@@ -28,7 +29,8 @@ const Overview: SFC<Props & RouteComponentProps> = props => {
     {
       title: "标题",
       dataIndex: "title",
-      key: "title"
+      key: "title",
+      width: "100px"
     },
     {
       title: "内容",
@@ -38,25 +40,56 @@ const Overview: SFC<Props & RouteComponentProps> = props => {
     {
       title: "标签",
       dataIndex: "tags",
-      key: "tags"
+      key: "tags",
+      width: "150px",
+      render: (tags: Array<string>) =>
+        tags.map(tag => (
+          <Tag key={tag} color="blue">
+            {tag}
+          </Tag>
+        ))
     },
     {
       title: "更新时间",
       dataIndex: "updatedAt",
-      key: "updatedAt"
+      key: "updatedAt",
+      width: "200px"
+    },
+    {
+      title: "删除",
+      dataIndex: "delete",
+      key: "delete",
+      width: "100px",
+      render: (text: string, record: { id: number }) => (
+        <Popconfirm
+          title="真滴要删除这篇文章嘛"
+          okText="删除"
+          cancelText="取消"
+          onConfirm={() => deleteArticle(record.id)}
+        >
+          <a>删除</a>
+        </Popconfirm>
+      )
     },
     {
       title: "编辑",
       dataIndex: "edit",
       key: "edit",
-      render: (text: any, record: any) => (
-        <a onClick={() => toArticle(text, record)}>编辑</a>
+      width: "100px",
+      render: (text: string, record: { id: number }) => (
+        <a onClick={() => toArticle(record.id)}>编辑</a>
       )
     }
   ];
 
-  const toArticle = (a: any, item: any) => {
-    props.history.push(`/admin/article/${item.id}`);
+  const deleteArticle = async (id: number) => {
+    setLoading(true);
+    await props.deleteArticle(id);
+    setLoading(false);
+  };
+
+  const toArticle = (id: number) => {
+    props.history.push(`/admin/article/${id}`);
   };
 
   useEffect(() => {
@@ -102,6 +135,7 @@ export default connect(
     articleList: state.article.articleList
   }),
   {
-    fetchArticleList
+    fetchArticleList,
+    deleteArticle
   }
 )(Overview);

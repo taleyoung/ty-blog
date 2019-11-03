@@ -47,7 +47,7 @@ export default class ArticleService extends Service {
           data.push({
             id: articleInfo.id,
             title: articleInfo.title,
-            content: articleInfo.content,
+            content: articleInfo.content.slice(0, 60) + "...",
             updatedAt: dayjs(articleInfo.updatedAt).format("YYYY-MM-DD HH:MM"),
             tags
           });
@@ -95,13 +95,24 @@ export default class ArticleService extends Service {
 
   public async deleteArticle(id: number) {
     const { ctx } = this;
-    return await ctx.model.Article.destroy({ where: { id } });
+    await ctx.model.Article.destroy({ where: { id } });
+    return await this.getArticleList();
   }
 
-  public async updateArticle(id: number, title: string, content: string) {
+  public async updateArticle(
+    id: number,
+    title: string,
+    content: string,
+    tags?: Array<string>
+  ) {
     try {
       const { ctx } = this;
-      await ctx.model.Article.update({ title, content }, { where: { id } });
+      await ctx.model.Article.update(
+        { title, content, tags },
+        { where: { id } }
+      );
+      if (tags) {
+      }
       return await this.getArticleDetail(id);
     } catch (error) {
       console.log("error", error);

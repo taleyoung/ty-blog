@@ -28,6 +28,15 @@ export default function article(state = initState, action: Action): Article {
         ...state,
         articleDetail: payload
       };
+    case actionTypes.DELETE_ARTICLE:
+      console.log("payload", payload);
+      return {
+        ...state,
+        articleList: {
+          total: payload.total,
+          data: payload.data
+        }
+      };
     default:
       return initState;
   }

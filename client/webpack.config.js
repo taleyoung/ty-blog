@@ -4,6 +4,9 @@ const webpack = require("webpack");
 const clientPath = path.resolve(__dirname, "src");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const devMode = process.env.NODE_ENV !== "production";
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+  .BundleAnalyzerPlugin;
+
 module.exports = {
   entry: {
     main: path.resolve(clientPath, "index.tsx")
@@ -121,6 +124,18 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: devMode ? "[name].css" : "[name].[hash].css",
       chunkFilename: devMode ? "[id].css" : "[id].[hash].css"
+    }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: "server",
+      analyzerHost: "127.0.0.1",
+      analyzerPort: 8888,
+      reportFilename: "report.html",
+      defaultSizes: "parsed",
+      openAnalyzer: true,
+      generateStatsFile: false,
+      statsFilename: "stats.json",
+      statsOptions: null,
+      logLevel: "info"
     })
   ]
 };

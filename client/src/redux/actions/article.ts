@@ -21,7 +21,10 @@ export const updateArticle = (id: number, data: UpdateArticleScheme) =>
   createActionAsync(
     `${url}/${id}`,
     actionTypes.UPDATE_ARTICLE_DETAIL,
-    data,
     "put",
+    data,
     "修改成功"
   );
+
+export const deleteArticle = (id: number) =>
+  createActionAsync(`${url}/${id}`, actionTypes.DELETE_ARTICLE, "delete");
