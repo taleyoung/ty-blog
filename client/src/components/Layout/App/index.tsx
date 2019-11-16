@@ -10,8 +10,8 @@ export interface Props {
   children: ReactNode;
 }
 
-const siderLayout = { xxl: 4, xl: 5, lg: 5, sm: 0, xs: 0 };
-const contentLayout = { xxl: 15, xl: 15, lg: 15, sm: 24, xs: 24 };
+const siderLayout = { xxl: 6, xl: 6, lg: 6, sm: 0, xs: 0 };
+const contentLayout = { xxl: 15, xl: 14, lg: 14, sm: 24, xs: 24 };
 
 const AppLayout: SFC<Props> = props => {
   return (
