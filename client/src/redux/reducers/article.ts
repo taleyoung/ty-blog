@@ -1,13 +1,23 @@
 import * as actionTypes from "../action-types";
-import { Article } from "../../types/store";
+import { ArticleState } from "../../types/store";
 import { Action } from "../../utils/createAction";
 
-let initState: Article = {
+let initState: ArticleState = {
   articleList: { total: 0, data: [] },
-  articleDetail: { id: 1, title: "", content: "", tags: [], updatedAt: "" }
+  articleDetail: {
+    id: 1,
+    title: "",
+    category: "",
+    content: "",
+    tags: [],
+    updatedAt: ""
+  }
 };
 
-export default function article(state = initState, action: Action): Article {
+export default function article(
+  state = initState,
+  action: Action
+): ArticleState {
   const { type, payload } = action;
   switch (type) {
     case actionTypes.GET_ARTICLE_LIST:
@@ -29,7 +39,6 @@ export default function article(state = initState, action: Action): Article {
         articleDetail: payload
       };
     case actionTypes.DELETE_ARTICLE:
-      console.log("payload", payload);
       return {
         ...state,
         articleList: {
@@ -38,6 +47,6 @@ export default function article(state = initState, action: Action): Article {
         }
       };
     default:
-      return initState;
+      return state;
   }
 }

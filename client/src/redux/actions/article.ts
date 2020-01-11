@@ -1,8 +1,9 @@
 import * as actionTypes from "../action-types";
 import { createActionAsync } from "../../utils/createAction";
 import { UpdateArticleScheme } from "@src/types";
+import { rootUrl } from "@config/api";
 
-const url = "http://127.0.0.1:7001/api/v1/article";
+const url = `${rootUrl}/article`;
 
 export const fetchArticleList = (
   page: number = 1,
@@ -26,5 +27,13 @@ export const updateArticle = (id: number, data: UpdateArticleScheme) =>
     "修改成功"
   );
 
+export const addArticle = (data: any) =>
+  createActionAsync(
+    `${url}`,
+    actionTypes.ADD_ARTICLE,
+    "post",
+    data,
+    "添加成功"
+  );
 export const deleteArticle = (id: number) =>
   createActionAsync(`${url}/${id}`, actionTypes.DELETE_ARTICLE, "delete");

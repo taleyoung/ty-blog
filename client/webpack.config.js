@@ -89,7 +89,8 @@ module.exports = {
       "@redux": path.resolve(clientPath, "redux"),
       "@components": path.resolve(clientPath, "components"),
       "@routes": path.resolve(clientPath, "routes"),
-      "@utils": path.resolve(clientPath, "utils")
+      "@utils": path.resolve(clientPath, "utils"),
+      "@config": path.resolve(clientPath, "config")
     },
     extensions: [".tsx", ".ts", ".js", ".d.ts"]
   },

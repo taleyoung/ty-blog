@@ -15,6 +15,7 @@ interface ArticleListTable extends ArticleDetail {
   key: string;
 }
 const Overview: SFC<Props & RouteComponentProps> = props => {
+  console.log("props :", props);
   const [loading, setLoading] = useState(true);
   const [tableData, setData] = useState([]);
   const { articleList } = props;
@@ -31,6 +32,11 @@ const Overview: SFC<Props & RouteComponentProps> = props => {
       dataIndex: "title",
       key: "title",
       width: "100px"
+    },
+    {
+      title: "分类",
+      dataIndex: "category",
+      key: "category"
     },
     {
       title: "内容",

@@ -1,11 +1,14 @@
-import { Counter } from "../../types/store";
+import { CounterState } from "../../types/store";
 import { Action } from "../actions/counter";
 import * as actionTypes from "../action-types";
 
-let initState: Counter = {
+let initState: CounterState = {
   number: 0
 };
-export default function counter(state: Counter = initState, action: Action) {
+export default function counter(
+  state: CounterState = initState,
+  action: Action
+) {
   switch (action.type) {
     case actionTypes.ADD:
       return {

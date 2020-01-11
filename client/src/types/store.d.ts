@@ -1,13 +1,24 @@
+import { string } from "prop-types";
+
 export interface Store {
-  counter: Counter;
-  article: Article;
+  counter: CounterState;
+  article: ArticleState;
+  tag: TagState;
 }
 
-export interface Counter {
+export interface CounterState {
   number: number;
 }
+interface AllTagsItem {
+  id: string;
+  name: string;
+}
 
-export interface Article {
+interface TagState {
+  allTags: Array<AllTagsItem>;
+}
+
+export interface ArticleState {
   articleList: ArticleList;
   articleDetail: ArticleDetail;
 }
@@ -20,6 +31,7 @@ export interface ArticleList {
 export interface ArticleDetail {
   id: number;
   title: string;
+  category: string;
   content: string;
   updatedAt: string;
   tags?: Array<string>;
