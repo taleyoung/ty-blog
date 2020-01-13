@@ -91,7 +91,7 @@ const Article: SFC<Props & RouteComponentProps> = props => {
         {isNew ? (
           <>
             {" "}
-            <div className="tag">初始标签</div>,
+            <div className="tag">初始标签</div>
             <Input value={initTag} onChange={e => setInitTag(e.target.value)} />
           </>
         ) : (

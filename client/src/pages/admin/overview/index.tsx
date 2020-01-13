@@ -15,7 +15,6 @@ interface ArticleListTable extends ArticleDetail {
   key: string;
 }
 const Overview: SFC<Props & RouteComponentProps> = props => {
-  console.log("props :", props);
   const [loading, setLoading] = useState(true);
   const [tableData, setData] = useState([]);
   const { articleList } = props;
@@ -36,7 +35,12 @@ const Overview: SFC<Props & RouteComponentProps> = props => {
     {
       title: "分类",
       dataIndex: "category",
-      key: "category"
+      key: "category",
+      render: (cate: string) => (
+        <Tag key={cate} color="#87d068">
+          {cate}
+        </Tag>
+      )
     },
     {
       title: "内容",
@@ -91,6 +95,7 @@ const Overview: SFC<Props & RouteComponentProps> = props => {
   const deleteArticle = async (id: number) => {
     setLoading(true);
     await props.deleteArticle(id);
+    await props.fetchArticleList();
     setLoading(false);
   };
 

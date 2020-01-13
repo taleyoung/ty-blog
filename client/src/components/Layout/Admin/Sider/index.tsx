@@ -1,5 +1,6 @@
 import React, { useState, SFC } from "react";
 import { Layout, Menu, Breadcrumb, Icon } from "antd";
+import { Link } from "react-router-dom";
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
@@ -23,8 +24,12 @@ const AppSider: SFC = () => {
             </span>
           }
         >
-          <Menu.Item key="1">文章列表</Menu.Item>
-          <Menu.Item key="2">新增文章</Menu.Item>
+          <Menu.Item key="1">
+            <Link to="/admin/overview">文章列表</Link>
+          </Menu.Item>
+          <Menu.Item key="2">
+            <Link to="/admin/article/new">新增文章</Link>
+          </Menu.Item>
         </SubMenu>
         <Menu.Item key="3">
           <Icon type="file" />
